@@ -7,6 +7,7 @@ import { BooksModule } from './books/books.module';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthorsModule } from './authors/authors.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // auto-generated
     }),
     BooksModule,
+    AuthorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

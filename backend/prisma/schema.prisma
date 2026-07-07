@@ -13,8 +13,15 @@ datasource db {
   provider = "postgresql"
 }
 
+model Author {
+  id    String    @id @default(cuid())
+  name  String
+  books Book[]
+}
+
 model Book {
-  id     Int    @id @default(autoincrement())
-  title  String
-  author String
+  id        String    @id @default(cuid())
+  title     String
+  authorId  String
+  author    Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }

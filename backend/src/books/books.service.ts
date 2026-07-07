@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookInput } from './dto/create-book.input';
 import { UpdateBookInput } from './dto/update-book.input';
-import { Book } from './entities/book.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -16,15 +15,15 @@ export class BooksService {
     return this.prisma.book.findMany();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} book`;
   }
 
-  update(id: number, updateBookInput: UpdateBookInput) {
+  update(id: string, updateBookInput: UpdateBookInput) {
     return `This action updates a #${id} book`;
   }
 
-  async remove(id: number): Promise<boolean> {
+  async remove(id: string): Promise<boolean> {
     try {
       await this.prisma.book.delete({ where: { id } });
       return true;

@@ -1,7 +1,28 @@
-export type Book = {
+// AUTHOR:
+type Author = {
+  id: string;
+  name: string;
+};
+
+export type GetAuthorsData = {
+  authors: Author[];
+};
+
+export type GetAuthorsVars = Record<string, never>;
+
+export type CreateAuthorData = {
+  createAuthor: Author;
+};
+
+export type CreateAuthorVars = {
+  createAuthorInput: { name: string };
+};
+
+// BOOKS:
+type Book = {
   id: string;
   title: string;
-  author: string;
+  author: Author;
 };
 
 export type GetBooksData = {
@@ -15,5 +36,5 @@ export type CreateBookData = {
 };
 
 export type CreateBookVars = {
-  createBookInput: { title: string; author: string };
+  createBookInput: { title: string; authorId: string };
 };

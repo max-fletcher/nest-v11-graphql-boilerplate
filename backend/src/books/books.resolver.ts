@@ -1,12 +1,25 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ID,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { BooksService } from './books.service';
 import { Book } from './entities/book.entity';
 import { CreateBookInput } from './dto/create-book.input';
 import { UpdateBookInput } from './dto/update-book.input';
+import { Author } from 'src/authors/entities/author.entity';
+import { AuthorsService } from 'src/authors/authors.service';
 
 @Resolver(() => Book)
 export class BooksResolver {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(
+    private readonly booksService: BooksService,
+    private readonly authorsService: AuthorsService,
+  ) {}
 
   @Mutation(() => Book)
   createBook(@Args('createBookInput') createBookInput: CreateBookInput) {
@@ -19,8 +32,8 @@ export class BooksResolver {
   }
 
   // #pending
-  @Query(() => Book, { name: 'book' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Book, { name: 'book', nullable: true })
+  findOne(@Args('id', { type: () => ID }) id: string) {
     return this.booksService.findOne(id);
   }
 
@@ -31,7 +44,12 @@ export class BooksResolver {
   }
 
   @Mutation(() => Book)
-  removeBook(@Args('id', { type: () => Int }) id: number) {
+  removeBook(@Args('id', { type: () => ID }) id: string) {
     return this.booksService.remove(id);
+  }
+
+  @ResolveField(() => Author)
+  author(@Parent() book: Book) {
+    return this.authorsService.findOne(book.authorId);
   }
 }
