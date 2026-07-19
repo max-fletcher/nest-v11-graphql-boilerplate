@@ -16,11 +16,11 @@ export class BooksService {
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} book`;
+    return this.prisma.book.findUnique({ where: { id: id } });
   }
 
-  update(id: string, updateBookInput: UpdateBookInput) {
-    return `This action updates a #${id} book`;
+  update(id: string, input: UpdateBookInput) {
+    return this.prisma.book.update({ where: { id: id }, data: input });
   }
 
   async remove(id: string): Promise<boolean> {

@@ -103,9 +103,12 @@ function App() {
     getBooksRefetch();
   };
 
-  if (getBooksLoading) return <p>Loading...</p>;
+  if (getBooksLoading || getAuthorsLoading) return <p>Loading...</p>;
 
   if (getBooksError) return <p>Error loading books: {getBooksError.message}</p>;
+
+  if (getAuthorsError)
+    return <p>Error loading authors: {getAuthorsError.message}</p>;
 
   if (!getBooksData)
     return <p>Failed to load books. Please check your network connectivity.</p>;

@@ -32,7 +32,8 @@ export class AuthorsResolver {
     return this.authorsService.update(updateAuthorInput.id, updateAuthorInput);
   }
 
-  @Mutation(() => Author)
+  // @Mutation(() => Author) // #NOTE: Do this later maybe
+  @Mutation(() => Boolean)
   removeAuthor(@Args('id', { type: () => ID }) id: string) {
     return this.authorsService.remove(id);
   }

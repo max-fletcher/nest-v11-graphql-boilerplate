@@ -1,0 +1,102 @@
+### BOOKS ###
+
+Get Books:
+query {
+  books {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+Get Single Book:
+query GetBook($id: ID!) {
+  book(id: $id) {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+// variables panel:
+{
+ "id": "cmraoynyn0002rovho96s1c3f"
+}
+
+Create Book:
+mutation {
+  createBook(createAuthorInput: { title: "The Cat In The Hat", authorId: "cmrao64d10000rovhg301pb2p" }) {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+
+Update book:
+mutation {
+  updateBook(updateAuthorInput: { id: "cmrs1ipf20000skvhy3i6g1f2", title: "The Cat In The Hat2", authorId: "cmrao64d10000rovhg301pb2p" }) {
+    id
+    title
+    author {
+      id
+      name
+    }
+  }
+}
+
+Delete book:
+mutation {
+  removeBook(id: "cmrs1ipf20000skvhy3i6g1f2")
+}
+
+### AUTHORS ###
+
+Get Authors:
+query {
+  authors {
+    id
+    name
+  }
+}
+
+Get Single Author:
+query GetAuthor($id: ID!) {
+  author(id: $id) {
+    id
+    name
+  }
+}
+// variables panel:
+{
+ "id": "cmraoynyn0002rovho96s1c3f"
+}
+
+Create Author:
+mutation {
+  createAuthor(createAuthorInput: { name: "Dr. Seuss" }) {
+    id
+    name
+  }
+}
+
+Update Author:
+mutation {
+  updateAuthor(updateAuthorInput: { id: "cmrs1wo6a0001skvh4np95vwy", name: "Rick Riordan" }) {
+    id
+    name
+  }
+}
+
+Delete Author:
+mutation {
+  removeAuthor(id: "cmrs1ipf20000skvhy3i6g1f2")
+}
